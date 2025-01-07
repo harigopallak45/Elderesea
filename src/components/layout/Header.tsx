@@ -3,19 +3,23 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/hooks/useAuth';
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
   { name: 'Doctors', href: '/doctors' },
+  { name: 'Telemedicine', href: '/telemedicine' },
+  { name: 'Emergency', href: '/emergency' },
+  { name: 'Medication', href: '/medication' },
   { name: 'About', href: '/about' },
-  { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
@@ -27,7 +31,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -43,13 +47,23 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-primary">
-              <Phone className="h-4 w-4" />
-              <span className="text-sm font-medium">+1800 789 4567</span>
-            </div>
-            <Button asChild>
-              <Link to="/book">Book Now</Link>
-            </Button>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link to="/profile">
+                  <Button variant="ghost" size="sm">
+                    <User className="h-4 w-4 mr-2" />
+                    Profile
+                  </Button>
+                </Link>
+                <Button variant="outline" size="sm" onClick={() => signOut()}>
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Link to="/book">
+                <Button>Book Now</Button>
+              </Link>
+            )}
           </div>
 
           <button
@@ -76,13 +90,23 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-            <div className="flex items-center space-x-2 py-2 text-primary">
-              <Phone className="h-4 w-4" />
-              <span className="text-sm font-medium">+1800 789 4567</span>
-            </div>
-            <Button asChild className="w-full">
-              <Link to="/book">Book Now</Link>
-            </Button>
+            {user ? (
+              <>
+                <Link to="/profile" className="block" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">
+                    <User className="h-4 w-4 mr-2" />
+                    Profile
+                  </Button>
+                </Link>
+                <Button variant="outline" className="w-full" onClick={() => signOut()}>
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <Link to="/book" className="block" onClick={() => setIsMenuOpen(false)}>
+                <Button className="w-full">Book Now</Button>
+              </Link>
+            )}
           </nav>
         )}
       </div>

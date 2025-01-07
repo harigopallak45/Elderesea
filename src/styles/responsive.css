@@ -1,0 +1,116 @@
+/* Global Responsive Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Remove right space */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile First Design */
+@media screen and (max-width: 640px) {
+  .container {
+    width: 100%;
+    padding: 0 1rem;
+    margin: 0;
+  }
+  
+  .hero-section {
+    padding: 4rem 1rem;
+  }
+  
+  /* Mobile Navigation */
+  .mobile-nav {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    z-index: 50;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    width: 100%;
+    padding: 0 2rem;
+    margin: 0 auto;
+  }
+  
+  .hero-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 4rem;
+    margin: 0 auto;
+  }
+  
+  .hero-section {
+    padding: 8rem 4rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Hover Effects */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-shadow {
+  transition: box-shadow 0.2s ease;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.hover-glow {
+  transition: all 0.2s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(66, 153, 225, 0.5);
+}
