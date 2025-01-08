@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Apple, PlayCircle } from 'lucide-react';
+import { Phone, Apple, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function DownloadApp() {
